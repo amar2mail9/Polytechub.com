@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "./heroSection01.css";
+
 
 // Import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";

@@ -2,10 +2,11 @@ import React from "react";
 
 import { FiArrowLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import Layout from "../layout/Layout";
 
 export default function Error() {
   return (
-    <>
+    <Layout>
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="text-center p-8 bg-white rounded-lg shadow-xl transform transition duration-500 ease-in-out scale-95 opacity-0 animate-fadeIn">
           <h1 className="text-6xl font-bold text-red-600 mb-4">404</h1>
@@ -24,6 +25,6 @@ export default function Error() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
