@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* global.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+
+}
+
+h2 {
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* p {
+    font-size: 1rem;
+   
+} */
+
+/* Add other styles like blog content or custom styles here */

@@ -1,0 +1,21 @@
+/* Customize pagination bullets */
+.swiper-pagination-bullet {
+  background: rgb(0, 236, 253); /* Default bullet color */
+  opacity: 1;
+  width: 30px;
+  height: 5px;
+  border-radius: 5px;
+
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.swiper-pagination-bullet:hover {
+  background-color: blueviolet;
+  transform: scale(1.2); /* Enlarge on hover */
+}
+
+/* Active bullet color */
+.swiper-pagination-bullet-active {
+  background: #ffffff; /* Active bullet color (blue) */
+  opacity: 1;
+}
