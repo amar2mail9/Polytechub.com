@@ -46,7 +46,7 @@ export default function Footer() {
           <div className="w-full sm:w-1/4 mb-4 sm:mb-0">
             <h3 className="font-semibold text-lg">Contact Us</h3>
             <ul className="mt-2">
-              <li className="text-gray-400"> Noida, Indis</li>
+              <li className="text-gray-400"> Delhi, India</li>
               <li className="text-gray-400">polytechub@gmail.com</li>
               <li className="text-gray-400">+91 9608553167</li>
             </ul>
