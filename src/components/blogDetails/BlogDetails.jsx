@@ -10,6 +10,8 @@ export default function BlogDetails() {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  console.log(slug);
+
   const fetchBlog = async () => {
     setLoading(true);
     try {
@@ -31,6 +33,7 @@ export default function BlogDetails() {
       setLoading(false);
     }
   };
+  console.log(slug);
 
   useEffect(() => {
     fetchBlog();

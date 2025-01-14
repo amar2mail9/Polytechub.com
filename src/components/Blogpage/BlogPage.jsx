@@ -72,6 +72,19 @@ export default function BlogPage() {
     }
   };
 
+  // extractCategory
+  function extractCategory(htmlString) {
+    if (!htmlString) return null;
+
+    // Create a temporary DOM element to parse the HTML
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlString;
+
+    // Find the <a> tag and extract its text content
+    const anchorTag = tempDiv.querySelector("a");
+    return anchorTag ? anchorTag.textContent.trim() : null;
+  }
+
   return (
     <>
       <Helmet>
@@ -101,64 +114,67 @@ export default function BlogPage() {
                     },
                   }}
                 >
-                  {blogs.map((blog, id) => (
-                    <div key={id} className="px-6">
-                      <Link to={`/blog-page/${blog.slug}`}>
-                        <motion.div
-                          className="bg-white shadow-md block md:hidden rounded-lg overflow-hidden hover:shadow-lg transition"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <img
-                            src={blog?.rttpg_featured_image_url?.full?.[0]}
-                            alt={blog.title.rendered}
-                            className="w-full h-48 object-cover"
-                          />
-                          <div className="p-4">
-                            <Link to={`/blog-page/${blog.slug}`}>
+                  {blogs.map((blog, id) => {
+                    // Extract the category name
+                    const categoryName = extractCategory(blog?.rttpg_category);
+
+                    console.log(categoryName);
+
+                    return (
+                      <div key={id} className="px-6">
+                        {/* Mobile */}
+                        <Link to={`/category/${categoryName}/${blog.slug}`}>
+                          <motion.div
+                            className="bg-white shadow-md block md:hidden rounded-lg overflow-hidden hover:shadow-lg transition"
+                            whileHover={{ scale: 1.05 }}
+                          >
+                            <img
+                              src={blog?.rttpg_featured_image_url?.full?.[0]}
+                              alt={blog.title.rendered}
+                              className="w-full h-48 object-cover"
+                            />
+                            <div className="p-4">
                               <h3 className="text-[1rem] font-semibold">
                                 {blog.title?.rendered?.length > 60
                                   ? `${blog.title?.rendered.slice(0, 60)}...`
                                   : blog.title?.rendered || "Untitled Post"}
                               </h3>
-                            </Link>
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: blog.excerpt?.rendered
-                                  ? blog.excerpt?.rendered.length > 180
-                                    ? `${blog.excerpt?.rendered.slice(
-                                        0,
-                                        180
-                                      )}[...]`
-                                    : blog.excerpt?.rendered
-                                  : "No excerpt available",
-                              }}
-                            />
-                            <Link
-                              to={`/blog-page/${blog.slug}`}
-                              className="text-blue-500 mt-2 inline-block hover:text-orange-400"
-                            >
-                              Read More
-                            </Link>
-                          </div>
-                        </motion.div>
-                      </Link>
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: blog.excerpt?.rendered
+                                    ? blog.excerpt?.rendered.length > 180
+                                      ? `${blog.excerpt?.rendered.slice(
+                                          0,
+                                          180
+                                        )}[...]`
+                                      : blog.excerpt?.rendered
+                                    : "No excerpt available",
+                                }}
+                              />
+                              <Link
+                                to={`/category/${categoryName}/${blog.slug}`}
+                                className="text-blue-500 mt-2 inline-block hover:text-orange-400"
+                              >
+                                Read More
+                              </Link>
+                            </div>
+                          </motion.div>
+                        </Link>
 
-                      {/* large Screen */}
-                      <Link to={`/blog-page/${blog.slug}`}>
-                        <motion.div
-                          className="bg-white shadow-md hidden md:grid  rounded-lg overflow-hidden hover:shadow-lg transition"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <div className="flex  items-center gap-2 rounded-md p-4 ">
-                            <img
-                              src={blog?.rttpg_featured_image_url?.full?.[0]}
-                              alt={blog.title.rendered}
-                              className="w-48 h-48 object-cover rounded-full"
-                            />
-
-                            <div className="">
-                              <div className="px-4">
-                                <Link to={`/blog-page/${blog.slug}`}>
+                        {/* Large Screen */}
+                        <Link to={`/category/${categoryName}/${blog.slug}`}>
+                          <motion.div
+                            className="bg-white shadow-md hidden md:grid rounded-lg overflow-hidden hover:shadow-lg transition"
+                            whileHover={{ scale: 1.05 }}
+                          >
+                            <div className="flex items-center gap-2 rounded-md p-4">
+                              <img
+                                src={blog?.rttpg_featured_image_url?.full?.[0]}
+                                alt={blog.title.rendered}
+                                className="w-48 h-48 object-cover rounded-full"
+                              />
+                              <div className="">
+                                <div className="px-4">
                                   <h3 className="text-[1.5rem] font-semibold">
                                     {blog.title?.rendered?.length > 60
                                       ? `${blog.title?.rendered.slice(
@@ -167,32 +183,32 @@ export default function BlogPage() {
                                         )}...`
                                       : blog.title?.rendered || "Untitled Post"}
                                   </h3>
-                                </Link>
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: blog.excerpt?.rendered
-                                      ? blog.excerpt?.rendered.length > 180
-                                        ? `${blog.excerpt?.rendered.slice(
-                                            0,
-                                            180
-                                          )}[...]`
-                                        : blog.excerpt?.rendered
-                                      : "No excerpt available",
-                                  }}
-                                />
-                                <Link
-                                  to={`/blog-page/${blog.slug}`}
-                                  className="text-blue-500 mt-2 inline-block "
-                                >
-                                  Read More
-                                </Link>
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: blog.excerpt?.rendered
+                                        ? blog.excerpt?.rendered.length > 180
+                                          ? `${blog.excerpt?.rendered.slice(
+                                              0,
+                                              180
+                                            )}[...]`
+                                          : blog.excerpt?.rendered
+                                        : "No excerpt available",
+                                    }}
+                                  />
+                                  <Link
+                                    to={`/category/${categoryName}/${blog.slug}`}
+                                    className="text-blue-500 mt-2 inline-block"
+                                  >
+                                    Read More
+                                  </Link>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </motion.div>
-                      </Link>
-                    </div>
-                  ))}
+                          </motion.div>
+                        </Link>
+                      </div>
+                    );
+                  })}
                 </motion.div>
               )}
 
@@ -245,32 +261,35 @@ export default function BlogPage() {
               >
                 <h2 className="text-2xl font-bold mb-4">Latest Posts</h2>
                 <div className="space-y-4">
-                  {latestPosts.map((post) => (
-                    <Link to={`/blog-page/${post.slug}`}>
-                      <motion.div
-                        key={post.id}
-                        className="p-3 bg-white mb-4 shadow-md rounded-lg hover:shadow-lg transition"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <img
-                          src={post.rttpg_featured_image_url?.full?.[0]}
-                          alt={post.title.rendered}
-                          className="w-48 h-48 mx-auto object-center object-cover rounded-lg mb-2"
-                        />
-                        <Link>
-                          <h3 className="text-lg font-semibold text-blue-600 ">
-                            {post.title.rendered}
-                          </h3>
-                        </Link>
-                        <Link
-                          to={`/blog-page/${post.slug}`}
-                          className="text-blue-500 mt-1 inline-block cursor-pointer"
+                  {latestPosts.map((post) => {
+                    const categoryName = extractCategory(post?.rttpg_category);
+                    return (
+                      <Link to={`/category/${categoryName}/${post.slug}`}>
+                        <motion.div
+                          key={post.id}
+                          className="p-3 bg-white mb-4 shadow-md rounded-lg hover:shadow-lg transition"
+                          whileHover={{ scale: 1.05 }}
                         >
-                          Read More
-                        </Link>
-                      </motion.div>
-                    </Link>
-                  ))}
+                          <img
+                            src={post.rttpg_featured_image_url?.full?.[0]}
+                            alt={post.title.rendered}
+                            className="w-48 h-48 mx-auto object-center object-cover rounded-lg mb-2"
+                          />
+                          <Link>
+                            <h3 className="text-lg font-semibold text-blue-600 ">
+                              {post.title.rendered}
+                            </h3>
+                          </Link>
+                          <Link
+                            to={`/category/${categoryName}/${post.slug}`}
+                            className="text-blue-500 mt-1 inline-block cursor-pointer"
+                          >
+                            Read More
+                          </Link>
+                        </motion.div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </motion.div>
 

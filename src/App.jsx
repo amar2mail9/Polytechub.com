@@ -16,10 +16,9 @@ export default function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/blog-page" element={<BlogPage />} />
         <Route path="/category/:category" element={<CategoryPage />} />
-        <Route path="/blog-page/:slug" element={<BlogDetails />} />
-        
-       
-        <Route path="*" element={<Error/>} />
+
+        <Route path="*" element={<Error />} />
+        <Route path="/category/:categoryname/:slug" element={<BlogDetails />} />
       </Routes>
     </BrowserRouter>
   );

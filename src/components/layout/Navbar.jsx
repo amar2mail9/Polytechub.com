@@ -49,6 +49,14 @@ export default function Navbar() {
     setIsSearchOpen(false); // Close search overlay
   };
 
+  const extractCategory = (htmlString) => {
+    if (!htmlString) return "Uncategorized";
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlString;
+    const anchorTag = tempDiv.querySelector("a");
+    return anchorTag ? anchorTag.textContent.trim() : "Uncategorized";
+  };
+
   return (
     <>
       {/* Navbar */}
@@ -126,7 +134,11 @@ export default function Navbar() {
               <div className="bg-white absolute shadow-md mt-2 p-2 rounded-lg max-h-60 overflow-y-auto">
                 <ul>
                   {searchResults.map((post) => (
-                    <Link to={`/blog-page/${post.slug}`}>
+                    <Link
+                      to={`/category/${extractCategory(post?.rttpg_category)}/${
+                        post.slug
+                      }`}
+                    >
                       <li
                         key={post.id}
                         className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
@@ -202,7 +214,11 @@ export default function Navbar() {
               <div className="bg-white shadow-md mt-2 p-2 rounded-lg max-h-60 overflow-y-auto">
                 <ul>
                   {searchResults.map((post) => (
-                    <Link to={`/blog-page/${post.slug}`}>
+                    <Link
+                      to={`/category/${extractCategory(post?.rttpg_category)}/${
+                        post.slug
+                      }`}
+                    >
                       <li
                         key={post.id}
                         className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
